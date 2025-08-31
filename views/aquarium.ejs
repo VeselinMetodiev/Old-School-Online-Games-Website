@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aquarium Coin Game</title>
+    <style>
+      :root {
+        --bg: #0b3b52;
+        --water-top: #0f6b8a;
+        --water-bottom: #063646;
+        --accent: #ffd24a;
+        --glass: rgba(255, 255, 255, 0.06);
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: Inter, system-ui, Segoe UI, Roboto, "Helvetica Neue", Arial;
+        color: #eaf6ff;
+      }
+      body {
+        background: linear-gradient(180deg, #012b38 0%, #001f28 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .app {
+        width: 100%;
+        max-width: 1100px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.02),
+          rgba(255, 255, 255, 0.01)
+        );
+        border-radius: 12px;
+        padding: 18px;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+      .controls {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+      }
+      .badge {
+        background: var(--glass);
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+      button {
+        background: #0da6d6;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 8px;
+        color: #003642;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: var(--accent);
+      }
+
+      .main {
+        display: grid;
+        grid-template-columns: 360px 1fr;
+        gap: 14px;
+      }
+
+      /* Aquarium */
+      .aquarium-wrap {
+        background: linear-gradient(
+          180deg,
+          var(--water-top),
+          var(--water-bottom)
+        );
+        border-radius: 10px;
+        padding: 14px;
+        min-height: 420px;
+        position: relative;
+        overflow: hidden;
+        border: 2px solid rgba(255, 255, 255, 0.04);
+      }
+      .surface {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 40px;
+        top: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.05),
+          transparent
+        );
+        pointer-events: none;
+      }
+
+      .seabed {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 80px;
+        background: linear-gradient(180deg, #2a4b3d, #12332a);
+        display: flex;
+        align-items: flex-end;
+        padding: 8px;
+        gap: 12px;
+      }
+      .seaweed {
+        width: 18px;
+        height: 60px;
+        background: linear-gradient(180deg, #0b7b4a, #0a633a);
+        border-radius: 12px;
+        transform-origin: bottom center;
+        animation: swish 4s infinite ease-in-out;
+      }
+      .seaweed:nth-child(2) {
+        height: 78px;
+        animation-duration: 5s;
+      }
+      .seaweed:nth-child(3) {
+        height: 58px;
+        animation-duration: 3.4s;
+      }
+
+      @keyframes swish {
+        0% {
+          transform: rotate(-6deg);
+        }
+        50% {
+          transform: rotate(6deg);
+        }
+        100% {
+          transform: rotate(-6deg);
+        }
+      }
+
+      /* coin indicator */
+      .hud {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .big-counter {
+        font-size: 28px;
+        font-weight: 800;
+      }
+      .small {
+        font-size: 13px;
+        opacity: 0.9;
+      }
+
+      /* Coin bubbles that float and can be clicked */
+      .coin {
+        position: absolute;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        color: #07323a;
+        background: radial-gradient(
+          circle at 30% 30%,
+          #fff6c3 0%,
+          #ffd24a 35%,
+          #e6a600 70%
+        );
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.45);
+        cursor: pointer;
+        border: 2px solid rgba(255, 255, 255, 0.12);
+      }
+      .coin.small {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+      }
+
+      /* fish */
+      .fish {
+        position: absolute;
+        display: block;
+        border-radius: 50% 50% 50% 50%;
+        transform-origin: center center;
+        filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.4));
+      }
+      .fish .body {
+        width: 120px;
+        height: 48px;
+        border-radius: 48px 48px 48px 48px;
+        position: relative;
+      }
+      .fish .tail {
+        width: 0;
+        height: 0;
+        border-top: 18px solid transparent;
+        border-bottom: 18px solid transparent;
+        border-left: 30px solid rgba(255, 255, 255, 0.1);
+        position: absolute;
+        right: -28px;
+        top: 6px;
+      }
+      .fish .eye {
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        position: absolute;
+        left: 18px;
+        top: 14px;
+      }
+
+      /* swimming animations */
+      @keyframes swim-right {
+        0% {
+          transform: translateX(-20%) rotateY(0deg);
+        }
+        100% {
+          transform: translateX(120%) rotateY(0deg);
+        }
+      }
+      @keyframes swim-left {
+        0% {
+          transform: translateX(120%) rotateY(180deg);
+        }
+        100% {
+          transform: translateX(-20%) rotateY(180deg);
+        }
+      }
+
+      /* floating coin spawn area */
+      .controls-panel {
+        background: rgba(255, 255, 255, 0.02);
+        padding: 12px;
+        border-radius: 8px;
+        min-height: 420px;
+      }
+      label {
+        display: block;
+        font-size: 13px;
+        margin-bottom: 6px;
+      }
+      input[type="range"] {
+        width: 100%;
+      }
+      .help {
+        font-size: 12px;
+        opacity: 0.9;
+      }
+
+      footer {
+        margin-top: 10px;
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.7);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      /* responsive */
+      @media (max-width: 880px) {
+        .main {
+          grid-template-columns: 1fr;
+        }
+        .aquarium-wrap {
+          min-height: 360px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <header>
+        <h1>Aquarium Coin Game</h1>
+        <div class="controls">
+          <div class="badge">Coins: <span id="coinCounter">0</span></div>
+          <div class="badge">Fish: <span id="fishCounter">0</span></div>
+          <button id="spawnCoinBtn">Spawn Coin</button>
+          <button id="autoToggle" class="secondary">Auto: Off</button>
+        </div>
+      </header>
+
+      <div class="main">
+        <div class="controls-panel">
+          <div class="hud">
+            <div class="big-counter" id="bigCount">0</div>
+            <div class="small">
+              Collect coins (click coins) to add fish. Set a
+              <code>?coin=NUMBER</code> URL parameter to start with coins.
+            </div>
+          </div>
+
+          <hr
+            style="
+              margin: 12px 0;
+              border: 0;
+              border-top: 1px solid rgba(255, 255, 255, 0.03);
+            "
+          />
+
+          <label>Coins per fish: <span id="cpp">3</span></label>
+          <input id="coinsPerFish" type="range" min="1" max="10" value="3" />
+
+          <label style="margin-top: 12px"
+            >Coin spawn interval (ms):
+            <span id="intervalLabel">1500</span></label
+          >
+          <input
+            id="spawnInterval"
+            type="range"
+            min="400"
+            max="5000"
+            step="100"
+            value="1500"
+          />
+
+          <div style="margin-top: 14px">
+            <button id="addFishManual">Add Fish Manually</button>
+            <button id="reset" class="secondary" style="margin-left: 8px">
+              Reset
+            </button>
+          </div>
+
+          <div
+            style="
+              margin-top: 14px;
+              font-size: 13px;
+              color: rgba(255, 255, 255, 0.85);
+            "
+          >
+            <strong>How it works</strong>
+            <p class="help">
+              Each time you collect coins, the game recalculates how many fish
+              should be in the aquarium. A fish is added for every
+              <em>coins per fish</em> you set. Fish swim smoothly across the
+              tank and have randomized sizes, colors and speeds.
+            </p>
+          </div>
+        </div>
+
+        <div>
+          <div class="aquarium-wrap" id="aquarium">
+            <div class="surface"></div>
+            <div class="seabed">
+              <div class="seaweed"></div>
+              <div class="seaweed"></div>
+              <div class="seaweed"></div>
+              <div style="flex: 1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div>
+          Tip: press <strong>Space</strong> to spawn a coin. Click a coin to
+          collect it.
+        </div>
+        <div>
+          Made for you — change <code>?coin=10</code> to start with coins.
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // read URL param 'coin' for starting coins
+      function getParam(name) {
+        const url = new URL(window.location.href);
+        return url.searchParams.get(name);
+      }
+
+      const aquarium = document.getElementById("aquarium");
+      const coinCounterEl = document.getElementById("coinCounter");
+      const fishCounterEl = document.getElementById("fishCounter");
+      const bigCountEl = document.getElementById("bigCount");
+      const coinsPerFishInput = document.getElementById("coinsPerFish");
+      const coinsPerFishLabel = document.getElementById("cpp");
+      const spawnIntervalInput = document.getElementById("spawnInterval");
+      const intervalLabel = document.getElementById("intervalLabel");
+
+      let coins = 0;
+      let fish = 0;
+      let coinsPerFish = parseInt(coinsPerFishInput.value, 10);
+      let desiredFish = 0;
+
+      // initial coins from URL param
+      const startCoinParam = parseInt(getParam("coin") || 0, 10);
+      if (!isNaN(startCoinParam) && startCoinParam > 0) {
+        coins = startCoinParam;
+      }
+
+      function updateHUD() {
+        coinCounterEl.textContent = coins;
+        fishCounterEl.textContent = fish;
+        bigCountEl.textContent = coins;
+      }
+
+      function setDesiredFish() {
+        desiredFish = Math.floor(coins / coinsPerFish);
+      }
+
+      // generate a fish element
+      function createFish() {
+        const f = document.createElement("div");
+        f.className = "fish";
+        const size = 60 + Math.random() * 60; // body width
+        const height = size * 0.45;
+        const topPercent = 10 + Math.random() * 65; // vertical position
+        const swimRight = Math.random() > 0.5;
+        const duration = 8000 + Math.random() * 14000; // speed
+        const color1 = randomColor();
+        const color2 = shadeColor(color1, -15);
+
+        f.style.top = topPercent + "%";
+        f.style.width = size + "px";
+        f.style.height = height + "px";
+        f.style.zIndex = Math.floor(100 + (100 - topPercent));
+
+        // apply animation
+        f.style.animation =
+          (swimRight ? "swim-right" : "swim-left") +
+          " " +
+          duration / 1000 +
+          "s linear infinite";
+        if (!swimRight) {
+          f.style.transform = "rotateY(180deg)";
+        }
+
+        // build inner
+        const body = document.createElement("div");
+        body.className = "body";
+        body.style.width = size + "px";
+        body.style.height = height + "px";
+        body.style.background =
+          "linear-gradient(90deg," + color1 + "," + color2 + ")";
+        body.style.borderRadius = height / 2 + "px";
+        body.style.position = "relative";
+
+        const tail = document.createElement("div");
+        tail.className = "tail";
+        tail.style.borderLeftColor = color2;
+
+        const eye = document.createElement("div");
+        eye.className = "eye";
+
+        body.appendChild(eye);
+        f.appendChild(body);
+        f.appendChild(tail);
+
+        // occasional small wiggle for tail
+        const wiggleDur = 0.3 + Math.random() * 0.7;
+        body.animate(
+          [
+            { transform: "translateY(0)" },
+            { transform: "translateY(-4px)" },
+            { transform: "translateY(0)" },
+          ],
+          { duration: 1000 * (1 + Math.random() * 2), iterations: Infinity }
+        );
+
+        aquarium.appendChild(f);
+        fish++;
+        updateHUD();
+        return f;
+      }
+
+      // remove oldest fish
+      function removeFish() {
+        const fishes = aquarium.querySelectorAll(".fish");
+        if (fishes.length > 0) {
+          fishes[0].remove();
+          fish = Math.max(0, fish - 1);
+          updateHUD();
+        }
+      }
+
+      // pick a random pleasant color
+      function randomColor() {
+        const palettes = [
+          "#ff7b7b",
+          "#ffb86b",
+          "#ffdb6b",
+          "#7bd389",
+          "#6bc2ff",
+          "#a07bff",
+          "#ff7bd9",
+        ];
+        return palettes[Math.floor(Math.random() * palettes.length)];
+      }
+      function shadeColor(hex, percent) {
+        // hex -> shaded
+        const f = parseInt(hex.slice(1), 16),
+          t = percent < 0 ? 0 : 255,
+          p = percent < 0 ? percent * -1 : percent;
+        const R = f >> 16,
+          G = (f >> 8) & 0x00ff,
+          B = f & 0x0000ff;
+        const r = Math.round(((t - R) * p) / 100) + R;
+        const g = Math.round(((t - G) * p) / 100) + G;
+        const b = Math.round(((t - B) * p) / 100) + B;
+        return (
+          "#" + (0x1000000 + (r << 16) + (g << 8) + b).toString(16).slice(1)
+        );
+      }
+
+      // coin spawn + click to collect
+      function spawnCoin(x, y, size = 44) {
+        const c = document.createElement("div");
+        c.className = "coin";
+        if (size < 40) c.classList.add("small");
+        const left = x !== undefined ? x : 10 + Math.random() * 80;
+        const top = y !== undefined ? y : 20 + Math.random() * 60;
+        c.style.left = left + "%";
+        c.style.top = top + "%";
+        c.textContent = "+1";
+
+        // float animation
+        const floatDur = 3000 + Math.random() * 2800;
+        c.animate(
+          [
+            { transform: "translateY(0)" },
+            { transform: "translateY(-18px)" },
+            { transform: "translateY(0)" },
+          ],
+          { duration: floatDur, iterations: Infinity }
+        );
+
+        c.addEventListener("click", (ev) => {
+          ev.stopPropagation();
+          // collect coin
+          coins += 1;
+          updateHUD();
+          setDesiredFish();
+          applyFishCounts();
+          c.remove();
+        });
+
+        aquarium.appendChild(c);
+
+        // auto-remove coins after some time
+        setTimeout(() => {
+          if (c.parentElement) c.remove();
+        }, 11000 + Math.random() * 7000);
+        return c;
+      }
+
+      // when coins change, ensure fish count follows desiredFish
+      function applyFishCounts() {
+        setDesiredFish();
+        // add fish until match
+        while (fish < desiredFish) {
+          createFish();
+        }
+        // remove fish if too many
+        while (fish > desiredFish) {
+          removeFish();
+        }
+      }
+
+      // UI hooks
+      document
+        .getElementById("spawnCoinBtn")
+        .addEventListener("click", () => spawnCoin());
+      document.getElementById("addFishManual").addEventListener("click", () => {
+        coins += coinsPerFish;
+        updateHUD();
+        applyFishCounts();
+      });
+      document.getElementById("reset").addEventListener("click", () => {
+        coins = 0;
+        desiredFish = 0; // remove fish elements
+        aquarium.querySelectorAll(".fish").forEach((n) => n.remove());
+        aquarium.querySelectorAll(".coin").forEach((n) => n.remove());
+        fish = 0;
+        updateHUD();
+      });
+
+      coinsPerFishInput.addEventListener("input", (e) => {
+        coinsPerFish = parseInt(e.target.value, 10);
+        coinsPerFishLabel.textContent = coinsPerFish;
+        applyFishCounts();
+      });
+
+      spawnIntervalInput.addEventListener("input", (e) => {
+        intervalLabel.textContent = e.target.value;
+      });
+
+      // keyboard spawn
+      window.addEventListener("keydown", (e) => {
+        if (e.code === "Space") {
+          e.preventDefault();
+          spawnCoin();
+        }
+      });
+
+      // click aquarium to spawn at precise location
+      aquarium.addEventListener("click", (e) => {
+        const rect = aquarium.getBoundingClientRect();
+        const leftPct = Math.max(
+          2,
+          Math.min(95, ((e.clientX - rect.left) / rect.width) * 100)
+        );
+        const topPct = Math.max(
+          5,
+          Math.min(85, ((e.clientY - rect.top) / rect.height) * 100)
+        );
+        spawnCoin(leftPct, topPct, 44);
+      });
+
+      // auto spawn toggle
+      let autoSpawn = false;
+      let autoTimer = null;
+      const autoBtn = document.getElementById("autoToggle");
+      autoBtn.addEventListener("click", () => {
+        autoSpawn = !autoSpawn;
+        autoBtn.textContent = "Auto: " + (autoSpawn ? "On" : "Off");
+        autoBtn.classList.toggle("secondary");
+        if (autoSpawn) startAuto();
+        else stopAuto();
+      });
+      function startAuto() {
+        stopAuto();
+        autoTimer = setInterval(
+          () => spawnCoin(),
+          parseInt(spawnIntervalInput.value, 10)
+        );
+      }
+      function stopAuto() {
+        if (autoTimer) clearInterval(autoTimer);
+        autoTimer = null;
+      }
+
+      spawnIntervalInput.addEventListener("change", () => {
+        if (autoSpawn) startAuto();
+      });
+
+      // initial HUD and fish based on URL param
+      updateHUD();
+      setDesiredFish();
+      applyFishCounts();
+
+      // small polish: spawn a few coins at start
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => spawnCoin(), 500 + i * 700);
+      }
+    </script>
+  </body>
+</html>

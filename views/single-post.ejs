@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper">
+        <!-- Main column -->
+        <div class="main-column">
+          <div class="box">
+            <div class="box-title">📝 <%= post.title %></div>
+
+            <article class="post-content">
+              <small class="post-meta">
+                публикувано от <b><%= post.username %></b> на <%= new
+                Date(post.createdDate).getDate() %>/ <%= new
+                Date(post.createdDate).getMonth() + 1 %>/ <%= new
+                Date(post.createdDate).getFullYear() %>
+              </small>
+
+              <div class="post-body"><%- filterUserHTML(post.body) %></div>
+            </article>
+
+            <% if (isAuthor) { %>
+            <div class="post-actions">
+              <a href="/edit-post/<%= post.id %>" class="btn">✏️ Редактирай</a>
+
+              <form
+                action="/delete-post/<%= post.id %>"
+                method="POST"
+                style="display: inline"
+              >
+                <button class="btn btn-danger">🗑️ Изтрий</button>
+              </form>
+            </div>
+            <% } %>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="right-sidebar">
+          <div class="box">
+            <div class="box-title">📂 Категории</div>
+            <ul class="category-list">
+              <li><a href="#">Технологии</a></li>
+              <li><a href="#">Игри</a></li>
+              <li><a href="#">Лични истории</a></li>
+              <li><a href="#">Разни</a></li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="box-title">🔗 Бързи връзки</div>
+            <ul class="category-list">
+              <li><a href="/">🏠 Начало</a></li>
+              <li><a href="/create-post">✏️ Нова публикация</a></li>
+              <li><a href="/login">🔑 Вход</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

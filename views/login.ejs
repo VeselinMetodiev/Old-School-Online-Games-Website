@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper-login">
+        <h2 class="login-title">Вход в системата</h2>
+        <form class="login-form" action="/login" method="POST">
+          <div class="form-row">
+            <label for="username">Потребителско име:</label>
+            <div class="input-container">
+              <input type="text" id="username" name="username" />
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="password">Парола:</label>
+            <div class="input-container">
+              <input type="password" id="password" name="password" />
+            </div>
+          </div>
+          <div class="form-checkbox">
+            <label>
+              <input type="checkbox" name="remember-me" /> Запомни ме
+            </label>
+          </div>
+          <button type="submit" class="form-button">Вход</button>
+        </form>
+        <div class="register-link-container">
+          <a href="#">Забравена парола?</a>
+        </div>
+        <div class="register-link-container" style="margin-top: 5px">
+          <a href="/register">Нямаш профил? Регистрирай се</a>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

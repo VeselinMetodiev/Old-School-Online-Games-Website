@@ -1,0 +1,49 @@
+<div class="box">
+  <div class="box-title">Онлайн игри</div>
+  <ul class="game-categories">
+    <li class="active"><a href="#">Всички</a></li>
+    <li><a href="#">Екшън</a></li>
+    <li><a href="#">Приключенски</a></li>
+    <li><a href="#">Спортни</a></li>
+    <li><a href="#">Логически</a></li>
+    <li><a href="#">Обличане</a></li>
+  </ul>
+
+  <ul class="game-list">
+    <% games.forEach(game => { %>
+    <li class="game-item">
+      <div class="game-thumbnail">
+        <img
+          src="<%= game.thumbnail_url %>"
+          alt="<%= game.title %> Thumbnail"
+          width="82px"
+          ;
+          height="82px"
+          ;
+        />
+      </div>
+      <div class="game-details">
+        <a href="/game/<%= game.id %>"
+          ><div class="game-title"><%= game.title %></div></a
+        >
+        <div class="game-info">Играна 121338 пъти</div>
+        <div class="game-description"><%= game.description %></div>
+      </div>
+    </li>
+    <% }); %>
+  </ul>
+
+  <div class="pagination-container">
+    <% if (currentPage > 1) { %>
+    <a href="/?page=<%= currentPage - 1 %>" class="pagination-link">Предишна</a>
+    <% } %> <% for (let i = 1; i <= totalPages; i++) { %>
+    <a
+      href="/?page=<%= i %>"
+      class="pagination-link <%= currentPage === i ? 'active' : '' %>"
+      ><%= i %></a
+    >
+    <% } %> <% if (currentPage < totalPages) { %>
+    <a href="/?page=<%= currentPage + 1 %>" class="pagination-link">Следваща</a>
+    <% } %>
+  </div>
+</div>

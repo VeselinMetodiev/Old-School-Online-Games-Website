@@ -1,0 +1,77 @@
+/* Main Content styles */
+.content-wrapper-login {
+  background-color: #f0f8ff;
+  padding: 20px;
+  min-height: 500px;
+}
+
+.login-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1a0dab;
+}
+
+.login-form {
+  width: 400px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  padding: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  width: 120px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-row .input-container {
+  flex-grow: 1;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #a0a0a0;
+}
+
+.form-checkbox {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.form-checkbox label {
+  font-weight: normal;
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #d6d6d6;
+  border: 1px solid #a0a0a0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #c0c0c0;
+}
+
+.register-link-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.register-link-container a {
+  color: #1a0dab;
+  text-decoration: underline;
+}

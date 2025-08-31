@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper">
+        <div class="main-column">
+          <div class="game-title-bar">
+            <span>Игра: Зомби Апокалипсис</span>
+          </div>
+          <div class="box game-container">
+            <iframe
+              src="https://funhtml5games.com?embed=angryturds"
+              style="width: 800px; height: 600px; border: none"
+              frameborder="0"
+              scrolling="no"
+              allowfullscreen
+            ></iframe>
+            <div class="game-description">
+              <p><b>Описание на играта:</b></p>
+              <p>
+                Годината е 2025. Вирус е превърнал по-голямата част от
+                човечеството в зомбита. Вие сте единственият оцелял във вашия
+                град. Единствената ви мисия е да оцелеете колкото се може
+                по-дълго и да се опитате да намерите други оцелели. Използвайте
+                стрелките за движение и интервал за стрелба.
+              </p>
+              <p><b>Контроли:</b></p>
+              <ul>
+                <li>Стрелки: движение</li>
+                <li>Интервал: стрелба</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-sidebar">
+          <div class="box">
+            <div class="box-title">Статистика за играта</div>
+            <table class="game-stats-table">
+              <tr>
+                <td>Играна днес</td>
+                <td>545 пъти</td>
+              </tr>
+              <tr>
+                <td>Играна вчера</td>
+                <td>802 пъти</td>
+              </tr>
+              <tr>
+                <td>Общо изиграни</td>
+                <td>241 725 пъти</td>
+              </tr>
+              <tr>
+                <td>Рейтинг</td>
+                <td>★★★★☆ (4/5)</td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="box">
+            <div class="box-title">Други игри</div>
+            <ul style="list-style: none; padding: 0">
+              <li style="border-bottom: 1px dashed #c0c0c0; padding: 5px 0">
+                <a href="#">Екшън игри</a>
+              </li>
+              <li style="border-bottom: 1px dashed #c0c0c0; padding: 5px 0">
+                <a href="#">Спортни игри</a>
+              </li>
+              <li style="border-bottom: 1px dashed #c0c0c0; padding: 5px 0">
+                <a href="#">Игри за момичета</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

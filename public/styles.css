@@ -1,0 +1,468 @@
+@import "games.css";
+@import "photos.css";
+@import "videos.css";
+@import "users.css";
+@import "game.css";
+@import "user.css";
+@import "register.css";
+@import "login.css";
+@import "upload.css";
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eefbe7; /* Light green background from the screenshot */
+  color: #333;
+  margin: 0;
+  padding: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  width: 980px; /* Fixed width for the old-school feel */
+  background-color: #ffffff;
+  border: 1px solid #c0c0c0;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header and Nav */
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e6e6e6;
+  padding: 10px;
+  border-bottom: 1px solid #c0c0c0;
+  text-align: right;
+} */
+
+/* .header a {
+  color: #1a0dab;
+  text-decoration: none;
+} */
+
+/* .header a:hover {
+  text-decoration: underline;
+} */
+
+/* New container to hold the nav and search */
+.nav-and-search-container {
+  display: flex;
+  justify-content: space-between; /* This will push the nav to the left and search to the right */
+  align-items: center; /* This will vertically align them */
+  background-color: #e6e6e6;
+  padding: 10px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 10px;
+}
+
+.main-nav a {
+  color: #1a0dab;
+  text-decoration: none;
+  padding: 5px;
+}
+
+.main-nav a:hover {
+  text-decoration: underline;
+}
+
+/* Remove the old .search-bar styles that handle display and padding, as the new container now handles them */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar input[type="text"] {
+  border: 1px solid #888;
+  padding: 5px;
+}
+
+.search-bar button {
+  border: 1px solid #888;
+  background-color: #f0f0f0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.search-bar button:hover {
+  background-color: #dcdcdc;
+}
+
+/* Marquee styles */
+.marquee-container {
+  background-color: #fdfc9f;
+  padding: 5px;
+  overflow: hidden;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Main layout with two columns */
+.content-wrapper {
+  display: flex;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.left-column {
+  flex: 1;
+  background-color: #f0f8ff; /* Light blue background from the screenshot */
+  padding: 10px;
+  border-right: 1px solid #c0c0c0;
+}
+
+.right-column {
+  width: 300px;
+  background-color: #f0f8ff; /* Light blue background from the screenshot */
+  padding: 10px;
+}
+
+/* Generic box styling */
+.box {
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.box-title {
+  background-color: #d6d6d6;
+  border: 1px solid #a0a0a0;
+  padding: 5px;
+  margin: -10px -10px 10px -10px;
+  font-weight: bold;
+}
+
+/* Sections specific to the design */
+.game-links a {
+  display: inline-block;
+  margin-right: 15px;
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+.game-links a:hover {
+  text-decoration: underline;
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.photo-gallery img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #c0c0c0;
+}
+
+.online-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #999;
+  background-color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 0.75rem;
+  text-align: center;
+  word-break: break-all;
+}
+
+.discussions {
+  border: 1px solid #c0c0c0;
+  padding: 10px;
+}
+
+.discussions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.discussions li {
+  padding: 5px 0;
+}
+
+.discussions li a {
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+.discussions li a:hover {
+  text-decoration: underline;
+}
+
+.error-box {
+  background-color: #ffe6e6;
+  border: 1px solid #e57373;
+  color: #b71c1c;
+  padding: 15px;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* New news styles */
+.news-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news-item {
+  border-bottom: 1px dashed #c0c0c0;
+  padding: 5px 0;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item-title {
+  font-weight: bold;
+  color: #1a0dab;
+}
+
+/* Footer */
+.footer {
+  background-color: #e6e6e6;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.8rem;
+  color: #666;
+  border-top: 1px solid #c0c0c0;
+}
+
+/* profile right */
+.profile-oval {
+  display: inline-block;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Makes the shape oval */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-oval a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.profile-pic {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.profile-oval:hover {
+  background-color: #e0e0e0;
+}
+
+.logo-img {
+  height: 50px; /* Adjust the size as needed */
+  width: auto;
+}
+
+.photo-item img {
+  width: 200px; /* Set a fixed width */
+  height: 150px; /* Set a fixed height */
+  object-fit: cover; /* This is crucial for maintaining aspect ratio and avoiding distortion */
+  display: block; /* Removes any extra space below the image */
+}
+
+/* Message box homepage */
+.ticker {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+
+  background: #fbfbfb;
+  border: 2px solid #c9d7a8;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.ticker-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  color: #1c4160;
+  min-width: 0; /* ellipsis support */
+}
+
+.ticker-left:hover {
+  text-decoration: underline;
+}
+
+.avatar {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-weight: 700;
+  color: #2a5d84;
+}
+.sep {
+  opacity: 0.6;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: min(60vw, 900px);
+}
+
+.new-msg-btn {
+  background: #f0f6ff;
+  border: 1px solid #98b6da;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 13px;
+  color: #0a4e9b;
+  text-decoration: none;
+}
+.new-msg-btn:hover {
+  background: #e3efff;
+}
+
+.ticker-form {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+}
+.ticker-form input {
+  flex: 1;
+  border: 1px solid #cfd9b5;
+  border-radius: 6px;
+  padding: 6px 8px;
+}
+.ticker-form button {
+  border: 1px solid #99badd;
+  border-radius: 6px;
+  padding: 6px 10px;
+  background: #f2f8ff;
+  cursor: pointer;
+}
+.ticker-form button:hover {
+  background: #e1efff;
+}
+
+/* Styles for the main widget container */
+.widget-container {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 0.5rem 1rem 0.5rem 0.5rem; /* top, right, bottom, left */
+  border-radius: 9999px; /* This creates the fully rounded shape */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border: 1px solid #e5e7eb;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease-in-out;
+  max-width: 100%; /* Ensures it fits on smaller screens */
+}
+
+/* Hover effect for the widget container */
+.widget-container:hover {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Styles for the avatar/initials container */
+.avatar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem; /* Default size for small screens */
+  height: 2.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background-color: #d1d5db;
+  color: #4b5563;
+  border-radius: 9999px;
+  user-select: none;
+}
+
+/* Styles for the online status indicator (the green dot) */
+.online-status {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: #22c55e;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 2px white; /* The white ring */
+}
+
+/* Styles for the username */
+.username {
+  margin-left: 0.75rem;
+  color: #1f2937;
+  font-weight: 500;
+  font-size: 1rem;
+  white-space: nowrap; /* Prevents the text from wrapping */
+}
+
+/* Media queries for larger screens (e.g., tablets and desktops) */
+@media (min-width: 768px) {
+  .avatar {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1rem;
+  }
+
+  .online-status {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .username {
+    margin-left: 1rem;
+  }
+}

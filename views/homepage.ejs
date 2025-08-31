@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %> <%- include('includes/ticker') %>
+
+      <!-- Marquee-style Scrolling Messages -->
+      <div class="marquee-container">
+        <span class="marquee-text"
+          >&#x2705; Добре дошли на началната страница! | &#x2705; Проверете
+          нашите нови игри! | &#x2705; Присъединете се към дискусиите!</span
+        >
+      </div>
+
+      <!-- Main Content Layout -->
+      <div class="content-wrapper">
+        <!-- Left Column -->
+        <div class="left-column">
+          <div class="box">
+            <div class="box-title">Онлайн игри</div>
+            <div class="game-links">
+              <a href="/gorata">Екшън игри</a>
+              <a href="/index">Игри за момичета</a>
+              <a href="/aquarium">Днешните ТОП 100</a>
+              <a href="#kefche-games">Приключенски игри</a>
+              <a href="#kefche-games">Спортни игри</a>
+            </div>
+          </div>
+
+          <!-- News Section -->
+          <div class="box">
+            <div class="box-title">Новини</div>
+            <ul class="news-list">
+              <li class="news-item">
+                <span class="news-item-title"
+                  >Нова Игра: "Зомби Апокалипсис"</span
+                ><br />
+                Потопете се в света на оцеляването с най-новата ни игра!
+              </li>
+              <li class="news-item">
+                <span class="news-item-title">Обновени Правила на Форума</span
+                ><br />
+                Моля, запознайте се с новите правила преди да пишете.
+              </li>
+              <li class="news-item">
+                <span class="news-item-title">Конкурс за Най-добър Профил</span
+                ><br />
+                Качете уникална снимка и спечелете награда!
+              </li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="box-title">Потребители онлайн</div>
+            <div class="online-users">
+              <div class="user-icon">user1</div>
+              <div class="user-icon">user2</div>
+              <div class="user-icon">user3</div>
+              <div class="user-icon">user4</div>
+              <div class="user-icon">user5</div>
+              <div class="user-icon">user6</div>
+              <div class="user-icon">user7</div>
+              <div class="user-icon">user8</div>
+              <div class="user-icon">user9</div>
+              <div class="user-icon">user10</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <div class="box">
+            <div class="box-title">Снимки</div>
+            <div class="photo-gallery">
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+              <img
+                src="https://placehold.co/100x100/dcdcdc/666666?text=Photo"
+                alt="Placeholder photo"
+              />
+            </div>
+          </div>
+          <div class="error-box">
+            <span style="font-size: 2rem">:(</span><br />
+            This is a mock error box.<br />
+            It adds to the retro feel of the page.
+          </div>
+          <div class="discussions">
+            <div class="box-title">Актуални Дискусии</div>
+            <ul>
+              <% discussions.forEach(discussion => { %>
+              <li>
+                <a
+                  href="user/<%= discussion.author_id %>/discussions/<%= discussion.id %>"
+                  ><%= discussion.title %></a
+                >
+                <% if (discussion.latest_reply) { %>
+                <small>
+                  - Последен отговор: <%= new
+                  Date(discussion.latest_reply).toLocaleString() %></small
+                >
+                <% } %>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

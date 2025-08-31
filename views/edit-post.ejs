@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <link rel="stylesheet" href="styles.css" />
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper">
+        <!-- Main column -->
+        <div class="main-column">
+          <div class="box">
+            <div class="box-title">✏️ Редактирай публикация</div>
+
+            <form
+              action="/edit-post/<%= post.id %>"
+              method="POST"
+              class="post-form"
+            >
+              <% errors.forEach(error => { %>
+              <p class="notice"><%= error %></p>
+              <% }) %>
+
+              <fieldset>
+                <label for="title"><small>Заглавие</small></label>
+                <input
+                  type="text"
+                  value="<%= post.title %>"
+                  id="title"
+                  name="title"
+                  autocomplete="off"
+                  class="form-input"
+                />
+
+                <label for="body"><small>Съдържание</small></label>
+                <textarea name="body" id="body" class="form-textarea">
+<%= post.body %></textarea
+                >
+
+                <div class="form-actions">
+                  <button class="btn btn-primary">💾 Запази промените</button>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="right-sidebar">
+          <div class="box">
+            <div class="box-title">🛠 Полезни съвети</div>
+            <ul class="category-list">
+              <li>Проверете правописа преди запазване</li>
+              <li>Използвайте абзаци за четимост</li>
+              <li>Не забравяйте да запазите промените</li>
+            </ul>
+          </div>
+
+          <div class="box">
+            <div class="box-title">📂 Бързи връзки</div>
+            <ul class="category-list">
+              <li><a href="/">🏠 Начало</a></li>
+              <li><a href="/create-post">✏️ Нова публикация</a></li>
+              <li><a href="/logout">🚪 Изход</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper">
+        <!-- LEFT COLUMN: Categories -->
+        <div class="left-column-games">
+          <div class="box">
+            <div class="box-title">КАТАЛОГ ИГРИ</div>
+            <ul class="categories">
+              <% categories.forEach(cat => { %>
+              <li class="<%= currentCategory === cat.slug ? 'active' : '' %>">
+                <a href="/games/<%= cat.slug %>"><%= cat.name %></a>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: Games -->
+        <div class="main-column">
+          <div class="box">
+            <div class="box-title">
+              <%= currentCategoryName || 'Всички игри' %>
+            </div>
+            <div class="games-grid">
+              <% games.forEach(game => { %>
+              <div class="game-card">
+                <a href="/game/<%= game.id %>">
+                  <img src="<%= game.thumbnail %>" alt="<%= game.title %>" />
+                </a>
+                <a href="/game/<%= game.id %>" class="game-title">
+                  <%= game.title %>
+                </a>
+              </div>
+              <% }) %>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+              <% for(let i = 1; i <= totalPages; i++) { %>
+              <a
+                href="?page=<%= i %><% if(currentCategory) { %>&category=<%= currentCategory %><% } %>"
+                class="pagination-link <%= currentPage === i ? 'active' : '' %>"
+              >
+                <%= i %>
+              </a>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

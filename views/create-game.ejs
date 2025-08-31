@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <!-- Main Content Layout -->
+      <div class="content-wrapper">
+        <div class="left-column">
+          <div class="box">
+            <div class="box-title">Създай нова игра</div>
+
+            <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
+            <div class="alert alert-danger">
+              <ul>
+                <% errors.forEach(error => { %>
+                <li><%= error %></li>
+                <% }); %>
+              </ul>
+            </div>
+            <% } %>
+
+            <form action="/create-game" method="POST">
+              <div class="form-group">
+                <label for="game-title">Заглавие:</label>
+                <input
+                  type="text"
+                  id="game-title"
+                  name="title"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="game-description">Описание:</label>
+                <textarea
+                  id="game-description"
+                  name="description"
+                  class="form-control"
+                  rows="5"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="game-thumbnail">URL на изображението:</label>
+                <input
+                  type="url"
+                  id="game-thumbnail"
+                  name="thumbnail_url"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="game-url">URL на играта:</label>
+                <input
+                  type="url"
+                  id="game-url"
+                  name="game_url"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Създай игра</button>
+            </form>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="box">
+            <div class="box-title">Съвет</div>
+            <p>
+              Уверете се, че всички полета са попълнени правилно, за да
+              създадете вашата игра.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

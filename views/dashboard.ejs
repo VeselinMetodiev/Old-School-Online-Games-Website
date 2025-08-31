@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper">
+        <!-- Main column -->
+        <div class="main-column">
+          <div class="box">
+            <div class="box-title">📜 Публикации</div>
+            <% if (user) { %>
+            <div class="actions">
+              <a href="/create-post" class="btn">✏️ Създай публикация</a>
+              <a href="/logout" class="btn">🚪 Изход</a>
+            </div>
+            <% if (posts.length == 0) { %>
+            <p>
+              Здравей, <b><%= user.username %></b>! Все още нямаш публикации.
+            </p>
+            <% } else { %>
+            <p>Здравей, <b><%= user.username %></b>! Ето твоите публикации:</p>
+            <% } %> <% } else { %>
+            <div class="actions">
+              <a href="/login" class="btn">🔑 Вход</a>
+            </div>
+            <% } %>
+
+            <ul class="post-list">
+              <% posts.forEach(post => { %>
+              <li>
+                <a href="/post/<%= post.id %>"><%= post.title %></a>
+                <span class="date">
+                  (<%= new Date(post.createdDate).getDate() %>/ <%= new
+                  Date(post.createdDate).getMonth() + 1 %>/ <%= new
+                  Date(post.createdDate).getFullYear() %>)
+                </span>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="right-sidebar">
+          <div class="box">
+            <div class="box-title">ℹ️ Информация</div>
+            <p>
+              Тук можеш да видиш твоите публикации, да създаваш нови и да
+              управляваш съдържанието си.
+            </p>
+          </div>
+
+          <div class="box">
+            <div class="box-title">📂 Категории</div>
+            <ul class="category-list">
+              <li><a href="#">Технологии</a></li>
+              <li><a href="#">Игри</a></li>
+              <li><a href="#">Лични истории</a></li>
+              <li><a href="#">Разни</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

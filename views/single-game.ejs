@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+<%- include('includes/header') %>
+      <!-- Main Content Layout -->
+      <div class="content-wrapper">
+        <div class="left-column">
+          <div class="box">
+            <div class="box-title"><%= game.title %></div>
+            <div class="game-details-full">
+              <img
+                src="<%= game.thumbnail_url %>"
+                alt="<%= game.title %> Thumbnail"
+                class="game-thumbnail-large"
+              />
+              <p class="game-description-full"><%= game.description %></p>
+              <div class="game-meta">
+                <span
+                  >Създадена от <a href="#"><%= game.username %></a> на <%= new
+                  Date(game.createdDate).toLocaleDateString() %></span
+                >
+              </div>
+              <div class="box game-container">
+            <iframe
+              src=<%= game.gameLink %>
+              style="width: 800px; height: 600px; border: none"
+              frameborder="0"
+              scrolling="no"
+              allowfullscreen
+            ></iframe>
+            <div class="game-description">
+              <p><b>Описание на играта:</b></p>
+              <p>
+                Годината е 2025. Вирус е превърнал по-голямата част от
+                човечеството в зомбита. Вие сте единственият оцелял във вашия
+                град. Единствената ви мисия е да оцелеете колкото се може
+                по-дълго и да се опитате да намерите други оцелели. Използвайте
+                стрелките за движение и интервал за стрелба.
+              </p>
+              <p><b>Контроли:</b></p>
+              <ul>
+                <li>Стрелки: движение</li>
+                <li>Интервал: стрелба</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+              <% if (isAuthor) { %>
+              <div class="author-actions">
+                <a href="/game/<%= game.id %>/edit" class="btn btn-secondary"
+                  >Редактирай</a
+                >
+                <form
+                  action="/game/<%= game.id %>/delete"
+                  method="POST"
+                  class="delete-form"
+                >
+                  <button type="submit" class="btn btn-danger">Изтрий</button>
+                </form>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="box">
+            <div class="box-title">Подобни игри</div>
+            <ul class="new-games">
+              <!-- This section can be populated with other games from the database -->
+              <li><a href="#">Нашествието на паяците</a></li>
+              <li><a href="#">Пъзел с животни</a></li>
+              <li><a href="#">Електрически коли 2</a></li>
+              <li><a href="#">Спаси принцесата</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+/* Main layout with two columns */
+.content-wrapper {
+  display: flex;
+  border-bottom: 1px solid #c0c0c0;
+}
+.left-sidebar {
+  width: 250px;
+  background-color: #f0f8ff; /* Light blue background from the screenshot */
+  padding: 10px;
+  border-right: 1px solid #c0c0c0;
+}
+.main-content {
+  flex: 1;
+  background-color: #f0f8ff; /* Light blue background from the screenshot */
+  padding: 10px;
+} /* Generic box styling */
+.box {
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.box-title {
+  background-color: #d6d6d6;
+  border: 1px solid #a0a0a0;
+  padding: 5px;
+  margin: -10px -10px 10px -10px;
+  font-weight: bold;
+}
+.profile-title-bar {
+  background-color: #d6d6d6;
+  padding: 5px 10px;
+  border-bottom: 1px solid #a0a0a0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+}
+.profile-title-bar a {
+  color: #1a0dab;
+  text-decoration: none;
+} /* User Profile
+Page specific styles */
+.user-info {
+  text-align: center;
+  margin-bottom: 15px;
+}
+/* This selector is for the avatar in the main content area */
+.main-box-with-image .profile-avatar {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #a0a0a0;
+  background-color: #e6e6e6;
+  flex-shrink: 0;
+}
+.user-info p {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+.sidebar-nav li {
+  border-bottom: 1px dashed #c0c0c0;
+}
+.sidebar-nav li:last-child {
+  border-bottom: none;
+}
+.sidebar-nav a {
+  display: block;
+  padding: 5px 0;
+  color: #1a0dab;
+  text-decoration: none;
+}
+.sidebar-nav a:hover {
+  text-decoration: underline;
+}
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.stats-table td {
+  padding: 3px 0;
+}
+.stats-table td:last-child {
+  text-align: right;
+  font-weight: bold;
+}
+.gift-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #ffc0cb; /* Pink
+color from the screenshot */
+  border: 1px solid #e08e9b;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.gift-button:hover {
+  background-color: #e08e9b;
+}
+.main-box-with-image {
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+}
+.main-box-with-image .content {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+}
+.main-box-with-image .info {
+  flex-grow: 1;
+}
+.main-box-with-image .info h3 {
+  margin: 0;
+  color: #1a0dab;
+  font-size: 1.1rem;
+}
+.main-box-with-image .info p {
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+}
+.placeholder-content {
+  background-color: #000;
+  width: 100%;
+  height: 300px;
+  margin-top: 10px;
+}

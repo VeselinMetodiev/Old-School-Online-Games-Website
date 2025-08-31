@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('includes/head') %>
+    <style>
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+        text-align: left;
+      }
+      th {
+        color: #e6005c;
+        font-size: 1.2em;
+      }
+      a {
+        color: #0066ff;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const showInputBtn = document.getElementById("show-input-btn");
+        const editorContainer = document.getElementById("editor-container");
+        const htmlInput = document.getElementById("html-input");
+        const renderBtn = document.getElementById("render-btn");
+        const outputContainer = document.getElementById("output-container");
+
+        // Show the editor container when the 'Open HTML Editor' button is clicked
+        showInputBtn.addEventListener("click", () => {
+          editorContainer.style.display = "block";
+        });
+
+        // Render the HTML when the 'Render HTML' button is clicked
+        renderBtn.addEventListener("click", () => {
+          const userHtml = htmlInput.value;
+          outputContainer.innerHTML = userHtml;
+        });
+      });
+    </script>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="profile-title-bar">
+        <span>Статус: В работилницата за разработка на Kefche Групи</span>
+      </div>
+
+      <div class="content-wrapper">
+        <div class="left-sidebar">
+          <div class="user-info">
+            <img
+              src="https://placehold.co/120x120/dcdcdc/666666?text=Аватар"
+              alt="Аватар на потребителя"
+              style="border: 1px solid #a0a0a0; margin-bottom: 5px"
+            />
+            <p>
+              <img
+                src="https://placehold.co/20x15/dcdcdc/666666?text=BG"
+                alt="Bulgarian Flag"
+                style="
+                  vertical-align: middle;
+                  margin-right: 5px;
+                  border: 1px solid #a0a0a0;
+                "
+              />
+              <b><%= user.username %></b>
+            </p>
+            <p
+              style="
+                margin-top: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="#666"
+                viewBox="0 0 16 16"
+                style="margin-right: 5px"
+              >
+                <path
+                  d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+                />
+              </svg>
+              (26)
+            </p>
+          </div>
+
+          <ul class="sidebar-nav">
+            <li><a href="#">Начало</a></li>
+            <li><a href="/create-game">Игри</a></li>
+            <li><a href="/upload-photo">Снимки</a></li>
+            <li><a href="#">Видео</a></li>
+            <li><a href="#">Блог</a></li>
+            <li><a href="#">Приятели</a></li>
+            <li><a href="#">Дискусии</a></li>
+            <li><a href="/forest">Горичка</a></li>
+          </ul>
+
+          <div class="box">
+            <div class="box-title">Статистика за профила</div>
+            <table class="stats-table">
+              <tr>
+                <td>Днес</td>
+                <td>545</td>
+              </tr>
+              <tr>
+                <td>Вчера</td>
+                <td>802</td>
+              </tr>
+              <tr>
+                <td>Общо</td>
+                <td>241 725</td>
+              </tr>
+              <tr>
+                <td>Регистриран</td>
+                <td>22.12.2007</td>
+              </tr>
+              <tr>
+                <td>П. вход</td>
+                <td>11.12.2008 19:43</td>
+              </tr>
+            </table>
+          </div>
+
+          <button class="gift-button">Подарете</button>
+        </div>
+
+        <div class="main-content">
+          <h2>Създай нова дискусия</h2>
+          <form method="POST" action="/user/<%= userId %>/discussions">
+            <input
+              type="text"
+              name="title"
+              placeholder="Заглавие на дискусия"
+              required
+              style="width: 100%; padding: 8px"
+            />
+            <br /><br />
+            <button
+              type="submit"
+              style="
+                padding: 8px 12px;
+                background: #0066ff;
+                color: white;
+                border: none;
+              "
+            >
+              Създай
+            </button>
+          </form>
+
+          <hr />
+          <table>
+            <thead>
+              <tr>
+                <th colspan="3">Моите дискусии</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% discussions.forEach(discussion => { %>
+              <tr>
+                <td>---</td>
+                <td>
+                  <a href="discussions/<%= discussion.id %>"
+                    ><%= discussion.title %></a
+                  >
+                </td>
+                <td><%= discussion.replies.length %></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+  </body>
+</html>

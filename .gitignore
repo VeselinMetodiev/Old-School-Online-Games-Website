@@ -1,0 +1,21 @@
+# Ignore environment variable files
+.env
+
+# Ignore database files
+*.db
+*.sqlite
+*.sqlite3
+database/
+db/
+
+/node_modules/
+
+.DS_Store
+Thumbs.db
+
+.vscode/
+
+*.swf
+*.png
+*.jpeg
+*.jpg

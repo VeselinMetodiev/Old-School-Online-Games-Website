@@ -1,0 +1,71 @@
+/* upload.css */
+
+.upload-form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form .box-title {
+  margin-top: -20px; /* Adjusting for the form's padding */
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group textarea,
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #c0c0c0;
+  box-sizing: border-box; /* To include padding and border in the element's total width and height */
+  font-family: Arial, sans-serif;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-actions {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.form-actions button {
+  background-color: #f0f0f0;
+  border: 1px solid #888;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+}
+
+.form-actions button:hover {
+  background-color: #dcdcdc;
+}
+
+/* Optional: Preview for selected image */
+.preview-container {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.preview-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #c0c0c0;
+  margin-top: 10px;
+  display: none; /* Initially hidden */
+}

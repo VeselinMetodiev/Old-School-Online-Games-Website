@@ -1,0 +1,124 @@
+/* Main layout with two columns */
+.content-wrapper {
+  display: flex;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.left-column {
+  flex: 1;
+  background-color: #f0f8ff; /* Light blue background from the screenshot */
+  padding: 10px;
+  border-right: 1px solid #c0c0c0;
+}
+
+.right-column {
+  width: 300px;
+  background-color: #f0f8ff; /* Light blue background from the screenshot */
+  padding: 10px;
+}
+
+/* Generic box styling */
+.box {
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.box-title {
+  background-color: #d6d6d6;
+  border: 1px solid #a0a0a0;
+  padding: 5px;
+  margin: -10px -10px 10px -10px;
+  font-weight: bold;
+}
+
+/* User list specific styles */
+.user-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px dashed #c0c0c0;
+}
+
+.user-item:last-child {
+  border-bottom: none;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  background-color: #e6e6e6;
+  border: 1px solid #a0a0a0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  text-align: center;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.user-name a {
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+.user-info {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.user-info span {
+  display: block;
+}
+
+.active-users li {
+  border-bottom: 1px dashed #c0c0c0;
+  padding: 5px 0;
+}
+
+.active-users li:last-child {
+  border-bottom: none;
+}
+
+.active-users a {
+  color: #1a0dab;
+  text-decoration: none;
+}
+
+.online-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #999;
+  background-color: #e6e6e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  font-size: 0.75rem;
+  text-align: center;
+  word-break: break-all;
+}

@@ -1,0 +1,74 @@
+/* Two-column layout */
+.content-wrapper {
+  display: flex;
+  border: 1px solid #c0c0c0;
+}
+
+/* Left column: smaller */
+.left-column-games {
+  width: 160px; /* smaller width */
+  background-color: #f0f8ff;
+  padding: 8px;
+  border-right: 1px solid #c0c0c0;
+}
+
+/* Categories list inside left column */
+.categories {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.categories li {
+  margin: 4px 0;
+}
+
+.categories li a {
+  display: block;
+  padding: 6px 8px;
+  background: #fff;
+  border: 1px solid #c0c0c0;
+  text-decoration: none;
+  color: #0000ee;
+  font-size: 0.9rem; /* slightly smaller text */
+}
+
+.categories li.active a {
+  background: #66b3ff;
+  color: #000;
+  font-weight: 700;
+}
+
+/* Right column: bigger */
+.main-column {
+  flex: 1; /* takes all remaining space */
+  padding: 12px;
+  background: #fff;
+}
+
+/* Games grid adapts to larger space */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.game-card {
+  text-align: center;
+}
+
+.game-card img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  border: 1px solid #a0a0a0;
+  background: #eee;
+}
+
+.game-title {
+  display: block;
+  margin-top: 6px;
+  color: #1a0dab;
+  text-decoration: none;
+  font-size: 0.95rem;
+}

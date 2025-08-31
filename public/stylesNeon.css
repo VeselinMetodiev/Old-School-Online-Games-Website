@@ -1,0 +1,317 @@
+/* ===================================
+   Retro Portal – Epic Color Upgrade
+   =================================== */
+
+/* -------- Variables -------- */
+:root {
+  --color-bg-main: #1e1e2f; /* Deep night background */
+  --color-bg-panel: #2b2b40; /* Dark panel */
+  --color-bg-column: #252538; /* Slightly darker columns */
+  --color-bg-box: #2e2e4a; /* Card background */
+  --color-border: #444466; /* Soft bluish border */
+  --color-border-dark: #666699;
+  --color-accent: #58d3ff; /* Neon blue links */
+  --color-accent-hover: #85e0ff; /* Light neon blue hover */
+  --color-error-bg: #ff3b3b20; /* Semi-transparent red */
+  --color-error-border: #ff5c5c;
+  --color-error-text: #ff9b9b;
+  --color-news-bg: #3d3d60;
+  --max-width: 980px;
+  --radius: 6px;
+  --padding: 0.625rem;
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* -------- Base -------- */
+@import "games.css";
+@import "photos.css";
+@import "videos.css";
+@import "users.css";
+@import "game.css";
+@import "user.css";
+@import "register.css";
+@import "logins.css";
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, #1e1e2f 0%, #131322 100%);
+  color: #f0f0f0;
+  margin: 0;
+  padding: var(--padding) 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  max-width: var(--max-width);
+  width: 100%;
+  background-color: var(--color-bg-panel);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+}
+
+/* -------- Links -------- */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+}
+
+a:focus,
+button:focus {
+  outline: 2px dashed var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* -------- Toolbar Sections -------- */
+.header,
+.main-nav,
+.search-bar,
+.footer {
+  background: linear-gradient(90deg, #2b2b40 0%, #30304d 100%);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--padding);
+  box-shadow: inset 0 -1px 0 var(--color-border-dark);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: var(--padding);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--padding);
+}
+
+.search-bar input[type="text"] {
+  border: 1px solid var(--color-border);
+  padding: 0.3125rem;
+  background-color: #1f1f30;
+  color: #fff;
+}
+
+.search-bar button {
+  border: 1px solid var(--color-border);
+  background: var(--color-accent);
+  color: #000;
+  padding: 0.3125rem 0.625rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s ease;
+}
+
+.search-bar button:hover {
+  background: var(--color-accent-hover);
+}
+
+.footer {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #aaa;
+  border-top: 1px solid var(--color-border);
+}
+
+/* -------- Marquee -------- */
+.marquee-container {
+  background-color: var(--color-news-bg);
+  padding: 0.3125rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+  will-change: transform;
+  color: var(--color-accent);
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* -------- Layout -------- */
+.content-wrapper {
+  display: flex;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.left-column,
+.right-column {
+  background-color: var(--color-bg-column);
+  padding: var(--padding);
+}
+
+.left-column {
+  flex: 1;
+  border-right: 1px solid var(--color-border);
+}
+
+.right-column {
+  width: 300px;
+}
+
+/* -------- Box -------- */
+.box {
+  background: var(--color-bg-box);
+  border: 1px solid var(--color-border);
+  padding: var(--padding);
+  margin-bottom: var(--padding);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.box-title {
+  background: linear-gradient(90deg, #3a3a5c 0%, #2e2e4a 100%);
+  border: 1px solid var(--color-border-dark);
+  padding: 0.3125rem;
+  margin: calc(-1 * var(--padding)) calc(-1 * var(--padding)) var(--padding);
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+/* -------- Photo Gallery -------- */
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--padding);
+  margin-top: var(--padding);
+}
+
+.photo-gallery img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* -------- Online Users -------- */
+.online-users {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3125rem;
+}
+
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--color-border-dark);
+  background-color: #1f1f30;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  font-size: 0.75rem;
+  text-align: center;
+  word-break: break-all;
+  border-radius: var(--radius);
+}
+
+/* -------- Discussions -------- */
+.discussions {
+  border: 1px solid var(--color-border);
+  padding: var(--padding);
+}
+
+/* -------- Error Box -------- */
+.error-box {
+  background-color: var(--color-error-bg);
+  border: 1px solid var(--color-error-border);
+  color: var(--color-error-text);
+  padding: 0.9375rem;
+  margin-top: var(--padding);
+  text-align: center;
+  border-radius: var(--radius);
+}
+
+/* -------- News -------- */
+.news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.news-item {
+  border-bottom: 1px dashed var(--color-border);
+  padding: 0.3125rem 0;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item-title {
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+/* -------- Profile Oval -------- */
+.profile-oval {
+  display: inline-block;
+  background-color: #2e2e4a;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+}
+
+.profile-oval a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-accent-hover);
+}
+
+.profile-pic {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 0.625rem;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.profile-oval:hover {
+  background-color: #3a3a5c;
+}
+
+/* -------- Logo -------- */
+.logo-img {
+  height: 50px;
+  width: auto;
+}
+
+/* -------- Responsive -------- */
+@media (max-width: 1024px) {
+  .content-wrapper {
+    flex-direction: column;
+  }
+  .right-column {
+    width: 100%;
+    border-left: none;
+  }
+}

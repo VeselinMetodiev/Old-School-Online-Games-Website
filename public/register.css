@@ -1,0 +1,96 @@
+/* Main Content styles */
+.content-wrapper-register {
+  background-color: #f0f8ff;
+  padding: 20px;
+  min-height: 500px;
+}
+
+.register-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1a0dab;
+}
+
+.register-form {
+  width: 500px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border: 1px solid #c0c0c0;
+  padding: 20px;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.form-row label {
+  width: 150px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.form-row .input-container {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.form-row input[type="text"],
+.form-row input[type="password"],
+.form-row input[type="email"],
+.form-row select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #a0a0a0;
+}
+
+.form-row select {
+  width: auto;
+}
+
+.form-row .radio-group {
+  display: flex;
+  gap: 15px;
+}
+
+.form-row .radio-group label {
+  font-weight: normal;
+  width: auto;
+}
+
+.form-terms {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-terms a {
+  color: #1a0dab;
+  text-decoration: underline;
+}
+
+.form-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #d6d6d6;
+  border: 1px solid #a0a0a0;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.form-button:hover {
+  background-color: #c0c0c0;
+}
+
+.login-link-container {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.login-link-container a {
+  color: #1a0dab;
+  text-decoration: underline;
+}

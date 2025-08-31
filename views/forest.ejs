@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forest Grower</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="forest.css" />
+  </head>
+  <body class="bg-green-100 flex items-center justify-center min-h-screen p-4">
+    <div
+      class="bg-white p-8 rounded-2xl shadow-xl flex flex-col items-center gap-6 max-w-4xl w-full"
+    >
+      <h1 class="text-4xl font-bold text-gray-800 text-center mb-4">
+        Forest Grower
+      </h1>
+
+      <div
+        id="game-field"
+        class="relative bg-lime-500 rounded-xl shadow-inner w-full aspect-video border-4 border-lime-700 overflow-hidden"
+      ></div>
+
+      <div
+        class="flex flex-col md:flex-row gap-4 w-full justify-center items-center"
+      >
+        <button
+          id="plant-seed-btn"
+          class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:bg-gray-400"
+        >
+          🌱 Plant a Seed
+        </button>
+        <button
+          id="add-leaves-btn"
+          class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:bg-gray-400"
+        >
+          🌿 Add Leaves
+        </button>
+        <button
+          id="grow-tall-btn"
+          class="bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:bg-gray-400"
+        >
+          🌲 Grow Tall
+        </button>
+        <button
+          id="build-treehouse-btn"
+          class="bg-gray-700 hover:bg-gray-800 text-white font-bold py-3 px-6 rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:bg-gray-400"
+        >
+          🏠 Build Treehouse
+        </button>
+      </div>
+
+      <div class="mt-4 text-center">
+        <p class="text-xl text-gray-700">
+          Total Treehouses:
+          <span id="tree-count" class="font-bold text-green-700">0</span>
+        </p>
+      </div>
+
+      <div id="message-box" class="message-box"></div>
+    </div>
+
+    <script>
+      // Use a self-executing function to avoid polluting the global scope
+      (() => {
+        // Get all necessary DOM elements
+        const gameField = document.getElementById("game-field");
+        const plantSeedBtn = document.getElementById("plant-seed-btn");
+        const addLeavesBtn = document.getElementById("add-leaves-btn");
+        const growTallBtn = document.getElementById("grow-tall-btn");
+        const buildTreehouseBtn = document.getElementById(
+          "build-treehouse-btn"
+        );
+        const treeCountSpan = document.getElementById("tree-count");
+        const messageBox = document.getElementById("message-box");
+
+        // Game state variables
+        let treehouseCount = 0;
+        let currentPlant = null; // Renamed to be more generic
+
+        // Define the sprites for each stage
+        const sprites = {
+          seed: "2.png",
+          sapling: "1.png",
+          tree: "13.png",
+          treehouse: "28.png",
+        };
+
+        // --- UI Functions ---
+
+        /**
+         * Displays a temporary message to the user.
+         * @param {string} message The message to display.
+         */
+        const showMessage = (message) => {
+          messageBox.textContent = message;
+          messageBox.style.display = "block";
+          setTimeout(() => {
+            messageBox.style.display = "none";
+          }, 1500);
+        };
+
+        /**
+         * Shakes a given element to indicate an error or invalid action.
+         * @param {HTMLElement} element The element to shake.
+         */
+        const shakeElement = (element) => {
+          element.classList.add("shake");
+          setTimeout(() => {
+            element.classList.remove("shake");
+          }, 500);
+        };
+
+        /**
+         * Generates a random position within the game field.
+         * @returns {{left: string, top: string}} An object with CSS left and top values.
+         */
+        const getRandomPosition = () => {
+          const gameFieldRect = gameField.getBoundingClientRect();
+          const randomLeft = Math.random() * (gameFieldRect.width - 150); // Adjusted for max treehouse size
+          const randomTop = Math.random() * (gameFieldRect.height - 150); // Adjusted for max treehouse size
+          return {
+            left: `${randomLeft}px`,
+            top: `${randomTop}px`,
+          };
+        };
+
+        // --- Core Game Logic ---
+
+        /**
+         * Plants a new seed in the field. This is the first stage.
+         */
+        const plantSeed = () => {
+          if (currentPlant) {
+            showMessage("There's already a seed waiting to grow!");
+            shakeElement(currentPlant);
+            return;
+          }
+
+          const plantElement = document.createElement("img");
+          plantElement.src = sprites.seed;
+          plantElement.classList.add("plant-sprite", "seed-sprite");
+
+          const position = getRandomPosition();
+          plantElement.style.left = position.left;
+          plantElement.style.top = position.top;
+
+          gameField.appendChild(plantElement);
+          currentPlant = plantElement;
+          currentPlant.dataset.stage = "seed";
+        };
+
+        /**
+         * Adds leaves to the current seed, turning it into a sapling. This is the second stage.
+         */
+        const addLeaves = () => {
+          if (!currentPlant || currentPlant.dataset.stage !== "seed") {
+            showMessage("You need to plant a seed first!");
+            shakeElement(plantSeedBtn);
+            return;
+          }
+
+          currentPlant.src = sprites.sapling;
+          currentPlant.classList.remove("seed-sprite");
+          currentPlant.classList.add("sapling-sprite");
+          currentPlant.dataset.stage = "sapling";
+        };
+
+        /**
+         * Grows the current sapling into a tall tree. This is the third stage.
+         */
+        const growTall = () => {
+          if (!currentPlant || currentPlant.dataset.stage !== "sapling") {
+            showMessage("Add leaves to the sapling first!");
+            shakeElement(addLeavesBtn);
+            return;
+          }
+
+          currentPlant.src = sprites.tree;
+          currentPlant.classList.remove("sapling-sprite");
+          currentPlant.classList.add("tree-sprite");
+          currentPlant.dataset.stage = "tree";
+        };
+
+        /**
+         * Builds a treehouse on the tall tree. This is the final stage.
+         */
+        const buildTreehouse = () => {
+          if (!currentPlant || currentPlant.dataset.stage !== "tree") {
+            showMessage("Grow the tree tall before building a treehouse!");
+            shakeElement(growTallBtn);
+            return;
+          }
+
+          currentPlant.src = sprites.treehouse;
+          currentPlant.classList.remove("tree-sprite");
+          currentPlant.classList.add("treehouse-sprite");
+          currentPlant.dataset.stage = "treehouse";
+
+          // Animate the final treehouse growing
+          currentPlant.style.transform = "scale(0.5)";
+          setTimeout(() => {
+            currentPlant.style.transform = "scale(1)";
+          }, 10);
+
+          // Increment treehouse count and update the display
+          treehouseCount++;
+          treeCountSpan.textContent = treehouseCount;
+
+          // Reset the currentPlant reference as the tree is now complete
+          currentPlant = null;
+        };
+
+        // --- Event Listeners ---
+        plantSeedBtn.addEventListener("click", plantSeed);
+        addLeavesBtn.addEventListener("click", addLeaves);
+        growTallBtn.addEventListener("click", growTall);
+        buildTreehouseBtn.addEventListener("click", buildTreehouse);
+      })();
+    </script>
+  </body>
+</html>

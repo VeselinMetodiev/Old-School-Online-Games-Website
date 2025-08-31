@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('includes/head') %>
+  <body>
+    <div class="container">
+      <%- include('includes/header') %>
+      <div class="content-wrapper">
+        <div class="left-column">
+          <!-- ⭐ CRITICAL FIX 1: action, method, and enctype moved to the <form> tag ⭐ -->
+          <form
+            class="upload-form"
+            action="/upload-photo"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <div class="box-title">Upload a New Photo</div>
+
+            <div class="form-group">
+              <label for="photo-title">Photo Title:</label>
+              <input type="text" id="photo-title" name="photo-title" required />
+            </div>
+
+            <div class="form-group">
+              <label for="photo-description">Description:</label>
+              <textarea
+                id="photo-description"
+                name="photo-description"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="photo-file">Select File:</label>
+              <!-- ⭐ CRITICAL FIX 2: name attribute changed to "photo" to match Multer ⭐ -->
+              <input
+                type="file"
+                id="photo-file"
+                name="photo"
+                accept="image/*"
+                required
+              />
+            </div>
+
+            <div class="preview-container">
+              <img
+                id="image-preview"
+                src="#"
+                alt="Image Preview"
+                class="preview-image"
+              />
+            </div>
+
+            <!-- The form-actions div no longer needs action/method attributes -->
+            <div class="form-actions">
+              <button type="submit">Upload Photo</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="right-column">
+          <div class="box">
+            <div class="box-title">Recent Uploads</div>
+            <div class="photo-gallery">
+              <img src="placeholder.jpg" alt="Recent Photo" />
+              <img src="placeholder.jpg" alt="Recent Photo" />
+              <img src="placeholder.jpg" alt="Recent Photo" />
+            </div>
+          </div>
+
+          <div class="box">
+            <div class="box-title">Online Users</div>
+            <div class="online-users">
+              <div class="user-icon">U1</div>
+              <div class="user-icon">U2</div>
+              <div class="user-icon">U3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <%- include('includes/footer') %>
+    </div>
+    <!-- Don't forget to add the client-side JavaScript for image preview here! -->
+    <script>
+      const photoFileInput = document.getElementById("photo-file");
+      const imagePreview = document.getElementById("image-preview");
+
+      photoFileInput.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imagePreview.src = e.target.result;
+            imagePreview.style.display = "block"; // Show the image
+          };
+          reader.readAsDataURL(file); // Read the file as a data URL
+        } else {
+          imagePreview.src = "#";
+          imagePreview.style.display = "none"; // Hide if no file selected
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!-- Ticker Bar -->
+<div class="ticker">
+  <a id="ticker-link" class="ticker-left" href="#" aria-label="Виж профила">
+    <img id="ticker-avatar" class="avatar" alt="avatar" />
+    <span id="ticker-username" class="username"></span>
+    <span class="sep">:</span>
+    <span id="ticker-text" class="text"></span>
+  </a>
+
+  <% if (user) { %>
+  <a href="/messages/new" class="new-msg-btn">ново съобщение</a>
+  <% } %>
+</div>
+
+<% if (user) { %>
+<!-- Optional: allow logged-in users to add ticker messages -->
+<form class="ticker-form" method="POST" action="/ticker-messages">
+  <input
+    type="text"
+    name="text"
+    maxlength="140"
+    required
+    placeholder="Добави съобщение…"
+  />
+  <button type="submit">+ Добави</button>
+</form>
+<% } %>
+
+<script>
+  console.log("hi");
+  const messages = [
+    {
+      text: "HI",
+      author: {
+        id: "1",
+        username: "vesko",
+        avatarUrl:
+          "https://buffer.com/resources/content/images/2024/11/free-stock-image-sites.png",
+      },
+    },
+    {
+      text: "Another message.",
+      author: {
+        id: "2",
+        username: "vesko2",
+        avatarUrl:
+          "https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/PNG_transparency_demonstration_1.png/640px-PNG_transparency_demonstration_1.png",
+      },
+    },
+  ];
+  // Messages passed from the server: [{ id, text, author: { id, username, avatarUrl } }, ...]
+  const TICKER_MESSAGES = messages || [];
+  const avatar = document.getElementById("ticker-avatar");
+  const username = document.getElementById("ticker-username");
+  const text = document.getElementById("ticker-text");
+  const link = document.getElementById("ticker-link");
+
+  let idx = -1;
+  function showNext() {
+    if (!TICKER_MESSAGES.length) return;
+    idx = (idx + 1) % TICKER_MESSAGES.length;
+    const m = TICKER_MESSAGES[idx];
+    console.log(TICKER_MESSAGES[idx]);
+    // Update UI for the current message
+    avatar.src =
+      m.author?.avatarUrl || "/uploads/photo-1754943527137-608240955.png";
+    username.textContent = m.author?.username || "Потребител";
+    text.textContent = m.text || "Some text";
+    link.href = `/user/${m.author?.id}`;
+  }
+
+  showNext(); // show the first one immediately
+  setInterval(showNext, 5000); // rotate every 5 seconds
+</script>
