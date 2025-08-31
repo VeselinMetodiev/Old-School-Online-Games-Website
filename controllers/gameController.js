@@ -1,5 +1,3 @@
-// controllers/gameController.js
-
 const db = require("../db").db;
 const sanitizeHTML = require("sanitize-html");
 

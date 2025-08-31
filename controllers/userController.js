@@ -1,5 +1,3 @@
-// controllers/userController.js
-
 const db = require("../db").db; // Access the database instance
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

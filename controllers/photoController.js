@@ -1,5 +1,3 @@
-// controllers/photoController.js
-
 const db = require("../db").db;
 const upload = require("../middleware/uploadMiddleware"); // Import the configured Multer instance
 const path = require("path");
